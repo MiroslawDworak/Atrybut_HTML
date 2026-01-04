@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Mirosław Dworak – Portfolio</title>
+  <meta name="description" content="Portfolio programisty – Mirosław Dworak">
+
+  <!-- Font Awesome (IKONY) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<header class="top-header">
+  <div class="header-inner">
+    <div class="logo">
+      <img src="logo.jpg" alt="Logo MD – Mirosław Dworak">
+    </div>
+
+    <nav class="main-nav">
+      <a href="#projects">Projekty</a>
+      <a href="#contact">Kontakt</a>
+      <button id="theme-toggle" aria-label="Przełącz motyw">🌙</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>
+      Cześć, jestem <span class="accent">Mirosław Dworak</span> 👋
+    </h1>
+    <p>Programista tworzący nowoczesne aplikacje webowe</p>
+  </div>
+</section>
+
+<main>
+
+<section id="projects">
+  <h2>Projekty</h2>
+
+  <div class="projects-grid">
+
+    <article class="project-card">
+      <h3>Task Manager</h3>
+      <p>
+        Aplikacja webowa do zarządzania zadaniami (CRUD, localStorage,
+        responsywny interfejs).
+      </p>
+
+      <div class="project-tech">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+      </div>
+
+      <div class="github-stats" data-repo="twojlogin/task-manager">
+        ⭐ <span class="stars">–</span>
+        🍴 <span class="forks">–</span>
+      </div>
+
+      <div class="project-links">
+        <a href="https://github.com/twojlogin/task-manager" target="_blank" rel="noopener">
+          GitHub
+        </a>
+<div class="project-links">
+  <a
+    href="https://github.com/twojlogin/task-manager"
+    target="_blank"
+    rel="noopener"
+    class="github-green"
+  >
+    GitHub
+  </a>
+</div>
+
+      </div>
+    </article>
+
+    <article class="project-card">
+      <h3>Portfolio</h3>
+      <p>
+        Osobista strona portfolio z trybem jasnym i ciemnym,
+        animacjami i responsywnym layoutem.
+      </p>
+
+      <div class="project-tech">
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JavaScript</span>
+      </div>
+
+      <div class="github-stats" data-repo="twojlogin/portfolio">
+        ⭐ <span class="stars">–</span>
+        🍴 <span class="forks">–</span>
+      </div>
+
+      <div class="project-links">
+        <a href="https://github.com/MiroslawDworak" target="_blank" rel="noopener">
+          GitHub
+        </a>
+<div class="project-links">
+  <a
+    href="https://github.com/MiroslawDworak"
+    target="_blank"
+    rel="noopener"
+    class="github-green"
+  >
+    GitHub
+  </a>
+</div>
+
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Kontakt</h2>
+  <p>
+    Email:
+    <a href="mailto:kontakt@dworak.io">kontakt@dworak.io</a>
+
+    <div class="footer-inner">
+    <p> © 2025-2026 Mirosław Dworak</p>
+
+    <div lass="footer-right">
+      <a href="https://github.com/miroslawdworak" aria-label="GitHub" target="_blank">
+        <i class="fab fa-github"></i>
+      </a>
+
+      <a href="https://x.com/M_Dworak" aria-label="X">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+
+      <a href="#" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+
+      <a href="#" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+
+      <a href="#" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+ </section>
+</main>
+    </div>
+</footer>
+<script>
+  const toggle = document.getElementById("theme-toggle");
+  const savedTheme = localStorage.getItem("theme");
+
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
+
+  toggle.addEventListener("click", () => {
+    const dark = document.body.classList.toggle("dark");
+    localStorage.setItem("theme", dark ? "dark" : "light");
+  });
+
+  document.querySelectorAll(".github-stats").forEach(el => {
+    const repo = el.dataset.repo;
+
+    fetch(`https://api.github.com/repos/${repo}`)
+      .then(res => res.json())
+      .then(data => {
+        el.querySelector(".stars").textContent = data.stargazers_count ?? 0;
+        el.querySelector(".forks").textContent = data.forks_count ?? 0;
+      })
+      .catch(() => {
+        el.querySelector(".stars").textContent = "-";
+        el.querySelector(".forks").textContent = "-";
+      });
+  });
+</script>
+
+</body>
+</html>
